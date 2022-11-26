@@ -19,7 +19,7 @@
       <Pane fx:id="theBoard" prefHeight="600.0" prefWidth="600.0"
          style="-fx-background-color: linear-gradient(to bottom right, derive(forestgreen, 20%), derive(forestgreen, -40%));">
          <children>
-            <Label fx:id="message" layoutX="50.0" layoutY="550.0" scaleZ="2.0"
+            <Label fx:id="message" layoutX="50.0" layoutY="500.0" scaleZ="2.0"
                    text="Click on a black piece to move it."
                    textFill="white" translateZ="1.0">
                <font>
