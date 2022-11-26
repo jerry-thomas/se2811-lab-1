@@ -1,0 +1,1 @@
+This is a checkers game. Please see the lab instructions for details.

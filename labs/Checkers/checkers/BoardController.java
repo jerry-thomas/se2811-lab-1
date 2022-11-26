@@ -1,4 +1,4 @@
-package exercise1_1_checkers;
+package checkers;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -26,12 +26,11 @@ public class BoardController {
     private Pane theBoard; // green space on which board squares and pieces are laid
 
     private Piece.Type whoseTurn = Piece.Type.BLACK;
-    private List<Piece> pieces = new ArrayList<>();
-    private List<Square> squares = new ArrayList<>();
+    private final List<Square> squares = new ArrayList<>();
     private Piece activePiece = null;
 
     @FXML
-    public void initialize() {              // executed after scene is loaded but before any methods
+    public void initialize() {
         // for fun, set up a gradient background; could probably do in SceneBuilder as well
         // note the label has a Z index of 2 so it is drawn above the panel, otherwise it may be displayed "under" the panel and not be visible
         theBoard.setStyle("-fx-background-color: linear-gradient(to bottom right, derive(forestgreen, 20%), derive(forestgreen, -40%));");
@@ -51,8 +50,6 @@ public class BoardController {
 
     private void createPiece(Piece.Type type, int x, int y) {
         Piece piece = new Piece(type, x, y);
-        pieces.add(piece);
-        BoardController.getSquare(x,y).placePiece(piece);
     }
 
     private void createSquares() {
@@ -99,15 +96,16 @@ public class BoardController {
 
     private void instanceTrySetActive(Piece piece) {
         if(piece.getType().equals(whoseTurn)) {
-            for(Piece otherPiece : pieces) {
-                otherPiece.setActive(false);
+            if(activePiece != null) {
+                activePiece.setActive(false);
             }
             piece.setActive(true);
             activePiece = piece;
             setMessage("Click on the square to which that piece should move.");
         } else {
-            setMessage("The piece you have selected cannot move because it is not that player's " +
-                    "turn.\nPlease select a piece from the opposite player");
+            setMessage("The piece you have selected cannot move because it is " +
+                    "not\nthat player's turn.\n" +
+                    "Please select a piece from the opposite player");
         }
     }
 
@@ -155,11 +153,10 @@ public class BoardController {
         return x >= 0 && y >= 0 && x < BOARD_WIDTH && y < BOARD_WIDTH;
     }
 
-    public static void capturePiece(Piece captured) {
-        getTheController().instanceCapturePiece(captured);
+    public static void removePiece(Piece removed) {
+        getTheController().instanceRemovePiece(removed);
     }
-    private void instanceCapturePiece(Piece captured) {
-        captured.beCaptured();
-        pieces.remove(captured);
+    private void instanceRemovePiece(Piece removed) {
+        removed.removeSelf();
     }
 }

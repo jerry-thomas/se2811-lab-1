@@ -1,4 +1,4 @@
-package exercise1_1_checkers;
+package checkers;
 
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -8,9 +8,9 @@ import javafx.scene.shape.Rectangle;
  * Represents a place on the board where a piece can sit.
  */
 public class Square {
-    private int x;
-    private int y;
-    private static int SQUARE_SIZE = BoardController.SQUARE_SIZE;
+    private final int x;
+    private final int y;
+    private static final int SQUARE_SIZE = BoardController.SQUARE_SIZE;
 
     /**
      * The piece currently sitting on this square.
@@ -20,6 +20,15 @@ public class Square {
     private Piece piece = null;
     private final Rectangle rectangle;
 
+    /**
+     * Sets the position of this square on the board, where the top left square
+     * is at (x,y) == (0,0),
+     * the top right square is at (BoardController.BOARD_WIDTH-1,0)
+     * and the bottom right square is at (BOARD_WIDTH-1,BOARD_WIDTH-1).
+     *
+     * @param x the horizontal position, increasing rightwards.
+     * @param y the vertical position, increasing downwards.
+     */
     public Square(int x, int y) {
         this.x = x;
         this.y = y;
@@ -63,12 +72,15 @@ public class Square {
 
     public void removePiece() {
         if(piece == null) {
-            throw new UnsupportedOperationException("Cannot remove piece from an empty square.");
+            throw new IllegalStateException("Cannot remove piece from an empty square.");
         }
         piece = null;
     }
 
     public void placePiece(Piece piece) {
+        if(this.piece != null) {
+            throw new UnsupportedOperationException("The place being moved to already has a piece on it.");
+        }
         if(piece == null) {
             throw new IllegalArgumentException("No piece provided.");
         }

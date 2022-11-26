@@ -1,4 +1,4 @@
-package exercise1_1_checkers;
+package checkers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

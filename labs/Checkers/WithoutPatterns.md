@@ -16,33 +16,40 @@ All pieces must move diagonally and can capture pieces by jumping over them.
 The current implementation does not implement kings.  It only implements ordinary
 pieces.
 
-Coding
-------
+Step-by-step editing instructions
+---------------------------------
+These instructions walk you through the edits that are needed to add kings to the game.  Avoid making changes to the structure of the code beyond what is described here.  If you find each step requires major rewrites with multiple methods, you are likely restructuring the code too much.
 
 1. Identify the place in the code where the type of a piece is defined.
-2. Add a new isKing boolean in this place.  Add this as an optional parameter to the constructor by using two constructors and a `this` call with a default value of `false` for isKing.
+2. Add a new isKing boolean in this place.  Add this as an optional parameter to the constructor by using 
+3. two constructors and a `this` call with a default value of `false` for isKing.
+
 
 3. Identify the place in the code where it determines that a black piece has reached
    the last row of the board.
 4. At this position, notify the board that the old ordinary black piece was captured.
-   Also create a new black king piece at this position on the board. Pieces automatically
-   add themselves to the board when created, but do NOT automatically add themselves to
-   the square over which they are placed.  It is necessary to explicitly place the new King
-   piece on the square from which the ordinary piece was removed.
+   Also create a new black king piece at this position on the board. (Pieces automatically
+   add themselves to the board when created.)
+
 
 5. Identify the place in the code where a black piece is drawn.
 6. Update this place to draw two ellipses instead of one, with the second ellipse
    placed five pixels above the first ellipse. Be sure to also make this ellipse clickable
    as the ellipse underneath it is.
 
+
 7. Identify the place in the code where the drawn piece is moved.
 8. Update this place to move both ellipses.
 
+
 9. Identify the place in the code where it determines if an ordinary move is valid.
-10. Update this code to work for Black Kings.
+10. Update this code to work for Black Kings. Kings can move backwards and forwards,
+   but still only diagonally.
+
 
 11. Identify the place in the code where it determines if a capture move is valid.
-12. Update this code to work for Black Kings.
+12. Update this code to work for Black Kings. Kings capture by jumping pieces
+   backwards and forwards, but still only diagonally.
 
 
 **DO NOT** redesign the provided code.  But you may optionally
@@ -55,24 +62,13 @@ Such changes are PURELY OPTIONAL, but the instructors may consider incorporating
 
 Reflections
 -----------
-Create a text file called reflections.md.  Use the following template for this file:
+Edit the provided file called reflections.md, replacing the parnethetical remarks with your answers.
 
-```
+In it, you will answer these questions:
+
 1: What design aspects in the provided code made your work easier?
---------------------------------------------------------------------
-
-(Delete this parenthetical remark and replace it with your answer to the question.)
-
 2: How do you think the design of this code could be improved to make this process easier?
-------------------------------------------------------------------------------------------
-
-(Delete this parenthetical remark and replace it with your answer to the question.)
-
 3: What did you learn about design while working on this lab?
-------------------------------------------------------------------------------------------
-
-(Delete this parenthetical remark and replace it with your answer to the question.)
-```
 
 Submission instructions
 --------------------------
